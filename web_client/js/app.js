@@ -2,7 +2,10 @@
     let currentDimension = 'overworld';
     let tileFormat = 'webp';
     let maxZoom = 4;
-    let currentZoom = 2;
+    let centerLat = 0;
+    let centerLng = 0;
+    let worldBounds = null;
+    let cacheBuster = Date.now();
 
     fetch('/api/status')
         .then(res => res.json())
@@ -12,6 +15,15 @@
             }
             if (data.max_zoom !== undefined) {
                 maxZoom = data.max_zoom;
+            }
+            if (data.center_x !== undefined && data.center_z !== undefined) {
+                centerLng = data.center_x;
+                centerLat = data.center_z;
+            }
+            if (data.min_block_x !== undefined && data.max_block_x !== undefined) {
+                const sw = L.latLng(data.min_block_z, data.min_block_x);
+                const ne = L.latLng(data.max_block_z, data.max_block_x);
+                worldBounds = L.latLngBounds(sw, ne);
             }
             initMap();
         })
@@ -27,8 +39,9 @@
             map.remove();
         }
 
+        const scaleFactor = 1 / Math.pow(2, maxZoom);
         const AmberCRS = L.Util.extend({}, L.CRS.Simple, {
-            transformation: new L.Transformation(1 / 256, 0, 1 / 256, 0),
+            transformation: new L.Transformation(scaleFactor, 0, scaleFactor, 0),
         });
 
         map = L.map('map', {
@@ -46,7 +59,7 @@
                 const z = Math.min(coords.z, maxZoom);
                 const x = coords.x;
                 const y = coords.y;
-                return `/tiles/${currentDimension}/${z}/${x}/${y}.${tileFormat}`;
+                return `/tiles/${currentDimension}/${z}/${x}/${y}.${tileFormat}?t=${cacheBuster}`;
             }
         });
 
@@ -57,15 +70,15 @@
             errorTileUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="rgba(15,23,42,0.6)"/></svg>',
         }).addTo(map);
 
-        map.setView([0, 0], Math.min(2, maxZoom));
+        map.setView([centerLat, centerLng], Math.min(2, maxZoom));
 
         const hudBlock = document.getElementById('hud-block-coords');
         const hudChunk = document.getElementById('hud-chunk-coords');
         const hudZoom = document.getElementById('hud-zoom-level');
 
         function updateCoords(latlng) {
-            const realBlockX = Math.round(latlng.lng * 256);
-            const realBlockZ = Math.round(latlng.lat * 256);
+            const realBlockX = Math.round(latlng.lng);
+            const realBlockZ = Math.round(latlng.lat);
 
             const chunkX = Math.floor(realBlockX / 16);
             const chunkZ = Math.floor(realBlockZ / 16);
@@ -74,6 +87,8 @@
             hudChunk.textContent = `${chunkX.toLocaleString()}, ${chunkZ.toLocaleString()}`;
             hudZoom.textContent = `Z: ${map.getZoom()}`;
         }
+
+        updateCoords({ lat: centerLat, lng: centerLng });
 
         map.on('mousemove', function (e) {
             updateCoords(e.latlng);
@@ -84,7 +99,7 @@
         });
 
         document.getElementById('btn-recenter').addEventListener('click', function () {
-            map.flyTo([0, 0], Math.min(2, maxZoom), { duration: 0.6 });
+            map.flyTo([centerLat, centerLng], Math.min(2, maxZoom), { duration: 0.6 });
         });
 
         document.querySelectorAll('.dim-btn').forEach(btn => {

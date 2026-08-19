@@ -75,6 +75,10 @@ pub fn render_world_map(options: RenderOptions) -> Result<RenderStats> {
         Dimension::TheEnd => "the_end",
     };
 
+    let dim_dir = options.output_dir.join(dim_name);
+    let _ = std::fs::remove_dir_all(&dim_dir);
+    let _ = std::fs::create_dir_all(&dim_dir);
+
     let mut tile_groups: HashMap<(i32, i32), Vec<ChunkPos>> = HashMap::new();
     for chunk in &chunks {
         let coord = TileCoord::from_chunk_pos(*chunk, max_zoom);
@@ -127,6 +131,39 @@ pub fn render_world_map(options: RenderOptions) -> Result<RenderStats> {
 
     let base_tiles_count = total_tiles_count.load(Ordering::Relaxed);
     let mut current_layer = base_tiles_map.into_inner().unwrap_or_default();
+
+    let (min_tx, max_tx, min_ty, max_ty) = if !current_layer.is_empty() {
+        (
+            current_layer.keys().map(|c| c.x).min().unwrap_or(0),
+            current_layer.keys().map(|c| c.x).max().unwrap_or(0),
+            current_layer.keys().map(|c| c.y).min().unwrap_or(0),
+            current_layer.keys().map(|c| c.y).max().unwrap_or(0),
+        )
+    } else {
+        (0, 0, 0, 0)
+    };
+
+    let center_block_x = ((min_tx as i64 + max_tx as i64) * 128 + 128) as i32;
+    let center_block_z = ((min_ty as i64 + max_ty as i64) * 128 + 128) as i32;
+
+    let min_block_x = min_tx * 256;
+    let min_block_z = min_ty * 256;
+    let max_block_x = (max_tx + 1) * 256;
+    let max_block_z = (max_ty + 1) * 256;
+
+    let meta_json = format!(
+        r#"{{"center_x":{},"center_z":{},"min_block_x":{},"min_block_z":{},"max_block_x":{},"max_block_z":{},"max_zoom":{},"format":"{}"}}"#,
+        center_block_x,
+        center_block_z,
+        min_block_x,
+        min_block_z,
+        max_block_x,
+        max_block_z,
+        max_zoom,
+        options.format.extension()
+    );
+    let _ = std::fs::write(dim_dir.join("metadata.json"), &meta_json);
+    let _ = std::fs::write(options.output_dir.join("metadata.json"), &meta_json);
 
     if max_zoom > 0 {
         for current_z in (1..=max_zoom).rev() {

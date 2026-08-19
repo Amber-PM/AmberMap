@@ -52,16 +52,24 @@ pub fn start_server(config: ServerConfig) -> Result<()> {
         let path = raw_url.split('?').next().unwrap_or("/");
 
         if path == "/api/status" {
-            let json_body = format!(
-                r#"{{"status":"ok","format":"{}","max_zoom":{}}}"#,
-                config.tile_format, config.max_zoom
-            );
+            let meta_path = config.tiles_dir.join("metadata.json");
+            let json_body = if let Ok(meta) = std::fs::read_to_string(&meta_path) {
+                meta
+            } else {
+                format!(
+                    r#"{{"status":"ok","format":"{}","max_zoom":{},"center_x":0,"center_z":0}}"#,
+                    config.tile_format, config.max_zoom
+                )
+            };
             let response = Response::from_string(json_body)
                 .with_header(
                     Header::from_bytes(&b"Content-Type"[..], &b"application/json"[..]).unwrap(),
                 )
                 .with_header(
                     Header::from_bytes(&b"Access-Control-Allow-Origin"[..], &b"*"[..]).unwrap(),
+                )
+                .with_header(
+                    Header::from_bytes(&b"Cache-Control"[..], &b"no-cache, no-store"[..]).unwrap(),
                 );
             let _ = request.respond(response);
             continue;
@@ -108,8 +116,11 @@ pub fn start_server(config: ServerConfig) -> Result<()> {
             let response = Response::from_data(data.into_owned())
                 .with_header(Header::from_bytes(&b"Content-Type"[..], mime.as_bytes()).unwrap())
                 .with_header(
-                    Header::from_bytes(&b"Cache-Control"[..], &b"public, max-age=3600"[..])
-                        .unwrap(),
+                    Header::from_bytes(
+                        &b"Cache-Control"[..],
+                        &b"no-cache, no-store, must-revalidate"[..],
+                    )
+                    .unwrap(),
                 );
             let _ = request.respond(response);
             continue;
@@ -117,7 +128,14 @@ pub fn start_server(config: ServerConfig) -> Result<()> {
 
         if let Some((data, mime)) = get_embedded_asset("index.html") {
             let response = Response::from_data(data.into_owned())
-                .with_header(Header::from_bytes(&b"Content-Type"[..], mime.as_bytes()).unwrap());
+                .with_header(Header::from_bytes(&b"Content-Type"[..], mime.as_bytes()).unwrap())
+                .with_header(
+                    Header::from_bytes(
+                        &b"Cache-Control"[..],
+                        &b"no-cache, no-store, must-revalidate"[..],
+                    )
+                    .unwrap(),
+                );
             let _ = request.respond(response);
             continue;
         }
