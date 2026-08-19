@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -19,7 +19,10 @@ use ambermap::web::{get_embedded_asset, resolve_mime};
 fn test_mime_type_resolution() {
     assert_eq!(resolve_mime("index.html"), "text/html; charset=utf-8");
     assert_eq!(resolve_mime("style.css"), "text/css; charset=utf-8");
-    assert_eq!(resolve_mime("app.js"), "application/javascript; charset=utf-8");
+    assert_eq!(
+        resolve_mime("app.js"),
+        "application/javascript; charset=utf-8"
+    );
     assert_eq!(resolve_mime("0.webp"), "image/webp");
     assert_eq!(resolve_mime("0.png"), "image/png");
     assert_eq!(resolve_mime("data.json"), "application/json");

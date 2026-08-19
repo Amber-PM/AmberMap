@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -25,6 +25,17 @@ pub enum TileFormat {
     Webp,
 }
 
+impl std::str::FromStr for TileFormat {
+    type Err = std::convert::Infallible;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s.to_lowercase().as_str() {
+            "webp" => Ok(Self::Webp),
+            _ => Ok(Self::Png),
+        }
+    }
+}
+
 impl TileFormat {
     pub fn extension(&self) -> &'static str {
         match self {
@@ -33,6 +44,7 @@ impl TileFormat {
         }
     }
 
+    #[allow(clippy::should_implement_trait)]
     pub fn from_str(s: &str) -> Self {
         match s.to_lowercase().as_str() {
             "webp" => Self::Webp,
@@ -62,17 +74,14 @@ pub fn save_tile(
 
     let target_path = target_dir.join(file_name);
 
-    let img = image::RgbaImage::from_raw(
-        TILE_SIZE as u32,
-        TILE_SIZE as u32,
-        buffer.pixels.to_vec(),
-    )
-    .ok_or_else(|| {
-        AmberError::Io(std::io::Error::new(
-            std::io::ErrorKind::InvalidData,
-            "failed to wrap raw tile buffer into rgba image",
-        ))
-    })?;
+    let img =
+        image::RgbaImage::from_raw(TILE_SIZE as u32, TILE_SIZE as u32, buffer.pixels.to_vec())
+            .ok_or_else(|| {
+                AmberError::Io(std::io::Error::new(
+                    std::io::ErrorKind::InvalidData,
+                    "failed to wrap raw tile buffer into rgba image",
+                ))
+            })?;
 
     let img_format = match format {
         TileFormat::Png => image::ImageFormat::Png,
@@ -80,7 +89,7 @@ pub fn save_tile(
     };
 
     img.save_with_format(&target_path, img_format)
-        .map_err(|e| AmberError::Io(std::io::Error::new(std::io::ErrorKind::Other, e)))?;
+        .map_err(|e| AmberError::Io(std::io::Error::other(e)))?;
 
     Ok(target_path)
 }

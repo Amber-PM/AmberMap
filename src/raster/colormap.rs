@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -84,21 +84,45 @@ impl ColorMap {
 
         entries.insert("minecraft:stone", BlockColor::opaque(125, 125, 125));
         entries.insert("minecraft:granite", BlockColor::opaque(154, 107, 89));
-        entries.insert("minecraft:polished_granite", BlockColor::opaque(154, 107, 89));
+        entries.insert(
+            "minecraft:polished_granite",
+            BlockColor::opaque(154, 107, 89),
+        );
         entries.insert("minecraft:diorite", BlockColor::opaque(188, 188, 191));
-        entries.insert("minecraft:polished_diorite", BlockColor::opaque(188, 188, 191));
+        entries.insert(
+            "minecraft:polished_diorite",
+            BlockColor::opaque(188, 188, 191),
+        );
         entries.insert("minecraft:andesite", BlockColor::opaque(135, 135, 137));
-        entries.insert("minecraft:polished_andesite", BlockColor::opaque(135, 135, 137));
+        entries.insert(
+            "minecraft:polished_andesite",
+            BlockColor::opaque(135, 135, 137),
+        );
         entries.insert("minecraft:deepslate", BlockColor::opaque(75, 75, 78));
-        entries.insert("minecraft:cobbled_deepslate", BlockColor::opaque(75, 75, 78));
-        entries.insert("minecraft:polished_deepslate", BlockColor::opaque(70, 70, 72));
+        entries.insert(
+            "minecraft:cobbled_deepslate",
+            BlockColor::opaque(75, 75, 78),
+        );
+        entries.insert(
+            "minecraft:polished_deepslate",
+            BlockColor::opaque(70, 70, 72),
+        );
         entries.insert("minecraft:tuff", BlockColor::opaque(108, 109, 102));
         entries.insert("minecraft:calcite", BlockColor::opaque(224, 225, 220));
-        entries.insert("minecraft:dripstone_block", BlockColor::opaque(134, 106, 92));
-        entries.insert("minecraft:pointed_dripstone", BlockColor::opaque(134, 106, 92));
+        entries.insert(
+            "minecraft:dripstone_block",
+            BlockColor::opaque(134, 106, 92),
+        );
+        entries.insert(
+            "minecraft:pointed_dripstone",
+            BlockColor::opaque(134, 106, 92),
+        );
         entries.insert("minecraft:bedrock", BlockColor::opaque(55, 55, 55));
         entries.insert("minecraft:cobblestone", BlockColor::opaque(120, 120, 120));
-        entries.insert("minecraft:mossy_cobblestone", BlockColor::opaque(100, 122, 95));
+        entries.insert(
+            "minecraft:mossy_cobblestone",
+            BlockColor::opaque(100, 122, 95),
+        );
         entries.insert("minecraft:gravel", BlockColor::opaque(136, 131, 131));
         entries.insert("minecraft:sand", BlockColor::opaque(219, 206, 153));
         entries.insert("minecraft:red_sand", BlockColor::opaque(190, 103, 34));
@@ -108,25 +132,55 @@ impl ColorMap {
         entries.insert("minecraft:crying_obsidian", BlockColor::opaque(34, 16, 52));
 
         entries.insert("minecraft:coal_ore", BlockColor::opaque(105, 105, 105));
-        entries.insert("minecraft:deepslate_coal_ore", BlockColor::opaque(65, 65, 68));
+        entries.insert(
+            "minecraft:deepslate_coal_ore",
+            BlockColor::opaque(65, 65, 68),
+        );
         entries.insert("minecraft:iron_ore", BlockColor::opaque(136, 124, 117));
-        entries.insert("minecraft:deepslate_iron_ore", BlockColor::opaque(82, 77, 74));
+        entries.insert(
+            "minecraft:deepslate_iron_ore",
+            BlockColor::opaque(82, 77, 74),
+        );
         entries.insert("minecraft:copper_ore", BlockColor::opaque(128, 118, 112));
-        entries.insert("minecraft:deepslate_copper_ore", BlockColor::opaque(78, 74, 71));
+        entries.insert(
+            "minecraft:deepslate_copper_ore",
+            BlockColor::opaque(78, 74, 71),
+        );
         entries.insert("minecraft:gold_ore", BlockColor::opaque(143, 136, 103));
-        entries.insert("minecraft:deepslate_gold_ore", BlockColor::opaque(88, 85, 67));
+        entries.insert(
+            "minecraft:deepslate_gold_ore",
+            BlockColor::opaque(88, 85, 67),
+        );
         entries.insert("minecraft:redstone_ore", BlockColor::opaque(140, 95, 95));
-        entries.insert("minecraft:lit_redstone_ore", BlockColor::opaque(180, 70, 70));
-        entries.insert("minecraft:deepslate_redstone_ore", BlockColor::opaque(90, 60, 60));
+        entries.insert(
+            "minecraft:lit_redstone_ore",
+            BlockColor::opaque(180, 70, 70),
+        );
+        entries.insert(
+            "minecraft:deepslate_redstone_ore",
+            BlockColor::opaque(90, 60, 60),
+        );
         entries.insert("minecraft:lapis_ore", BlockColor::opaque(102, 114, 138));
-        entries.insert("minecraft:deepslate_lapis_ore", BlockColor::opaque(62, 70, 88));
+        entries.insert(
+            "minecraft:deepslate_lapis_ore",
+            BlockColor::opaque(62, 70, 88),
+        );
         entries.insert("minecraft:diamond_ore", BlockColor::opaque(114, 142, 140));
-        entries.insert("minecraft:deepslate_diamond_ore", BlockColor::opaque(68, 90, 90));
+        entries.insert(
+            "minecraft:deepslate_diamond_ore",
+            BlockColor::opaque(68, 90, 90),
+        );
         entries.insert("minecraft:emerald_ore", BlockColor::opaque(106, 136, 112));
-        entries.insert("minecraft:deepslate_emerald_ore", BlockColor::opaque(64, 88, 70));
+        entries.insert(
+            "minecraft:deepslate_emerald_ore",
+            BlockColor::opaque(64, 88, 70),
+        );
 
         entries.insert("minecraft:water", BlockColor::translucent(44, 98, 204, 180));
-        entries.insert("minecraft:flowing_water", BlockColor::translucent(44, 98, 204, 180));
+        entries.insert(
+            "minecraft:flowing_water",
+            BlockColor::translucent(44, 98, 204, 180),
+        );
         entries.insert("minecraft:lava", BlockColor::opaque(216, 92, 18));
         entries.insert("minecraft:flowing_lava", BlockColor::opaque(216, 92, 18));
 
@@ -153,22 +207,64 @@ impl ColorMap {
         entries.insert("minecraft:crimson_planks", BlockColor::opaque(101, 48, 70));
         entries.insert("minecraft:warped_planks", BlockColor::opaque(43, 105, 99));
 
-        entries.insert("minecraft:leaves", BlockColor::translucent(45, 115, 30, 240));
-        entries.insert("minecraft:oak_leaves", BlockColor::translucent(45, 115, 30, 240));
-        entries.insert("minecraft:spruce_leaves", BlockColor::translucent(55, 90, 55, 240));
-        entries.insert("minecraft:birch_leaves", BlockColor::translucent(90, 130, 45, 240));
-        entries.insert("minecraft:jungle_leaves", BlockColor::translucent(35, 120, 20, 240));
-        entries.insert("minecraft:acacia_leaves", BlockColor::translucent(75, 110, 25, 240));
-        entries.insert("minecraft:dark_oak_leaves", BlockColor::translucent(30, 85, 15, 240));
-        entries.insert("minecraft:azalea_leaves", BlockColor::translucent(75, 105, 35, 240));
-        entries.insert("minecraft:flowering_azalea_leaves", BlockColor::translucent(140, 90, 110, 240));
-        entries.insert("minecraft:mangrove_leaves", BlockColor::translucent(60, 110, 30, 240));
-        entries.insert("minecraft:cherry_leaves", BlockColor::translucent(230, 160, 185, 240));
+        entries.insert(
+            "minecraft:leaves",
+            BlockColor::translucent(45, 115, 30, 240),
+        );
+        entries.insert(
+            "minecraft:oak_leaves",
+            BlockColor::translucent(45, 115, 30, 240),
+        );
+        entries.insert(
+            "minecraft:spruce_leaves",
+            BlockColor::translucent(55, 90, 55, 240),
+        );
+        entries.insert(
+            "minecraft:birch_leaves",
+            BlockColor::translucent(90, 130, 45, 240),
+        );
+        entries.insert(
+            "minecraft:jungle_leaves",
+            BlockColor::translucent(35, 120, 20, 240),
+        );
+        entries.insert(
+            "minecraft:acacia_leaves",
+            BlockColor::translucent(75, 110, 25, 240),
+        );
+        entries.insert(
+            "minecraft:dark_oak_leaves",
+            BlockColor::translucent(30, 85, 15, 240),
+        );
+        entries.insert(
+            "minecraft:azalea_leaves",
+            BlockColor::translucent(75, 105, 35, 240),
+        );
+        entries.insert(
+            "minecraft:flowering_azalea_leaves",
+            BlockColor::translucent(140, 90, 110, 240),
+        );
+        entries.insert(
+            "minecraft:mangrove_leaves",
+            BlockColor::translucent(60, 110, 30, 240),
+        );
+        entries.insert(
+            "minecraft:cherry_leaves",
+            BlockColor::translucent(230, 160, 185, 240),
+        );
 
-        entries.insert("minecraft:short_grass", BlockColor::translucent(80, 140, 45, 200));
-        entries.insert("minecraft:tall_grass", BlockColor::translucent(80, 140, 45, 200));
+        entries.insert(
+            "minecraft:short_grass",
+            BlockColor::translucent(80, 140, 45, 200),
+        );
+        entries.insert(
+            "minecraft:tall_grass",
+            BlockColor::translucent(80, 140, 45, 200),
+        );
         entries.insert("minecraft:fern", BlockColor::translucent(75, 135, 40, 200));
-        entries.insert("minecraft:large_fern", BlockColor::translucent(75, 135, 40, 200));
+        entries.insert(
+            "minecraft:large_fern",
+            BlockColor::translucent(75, 135, 40, 200),
+        );
         entries.insert("minecraft:dandelion", BlockColor::opaque(245, 215, 40));
         entries.insert("minecraft:poppy", BlockColor::opaque(220, 35, 35));
         entries.insert("minecraft:blue_orchid", BlockColor::opaque(45, 160, 225));
@@ -180,7 +276,10 @@ impl ColorMap {
         entries.insert("minecraft:pink_tulip", BlockColor::opaque(235, 140, 175));
         entries.insert("minecraft:oxeye_daisy", BlockColor::opaque(225, 230, 230));
         entries.insert("minecraft:cornflower", BlockColor::opaque(65, 105, 215));
-        entries.insert("minecraft:lily_of_the_valley", BlockColor::opaque(230, 235, 235));
+        entries.insert(
+            "minecraft:lily_of_the_valley",
+            BlockColor::opaque(230, 235, 235),
+        );
         entries.insert("minecraft:wither_rose", BlockColor::opaque(35, 30, 30));
         entries.insert("minecraft:sunflower", BlockColor::opaque(240, 195, 30));
         entries.insert("minecraft:lilac", BlockColor::opaque(190, 135, 195));
@@ -193,9 +292,18 @@ impl ColorMap {
         entries.insert("minecraft:lily_pad", BlockColor::opaque(40, 95, 30));
         entries.insert("minecraft:waterlily", BlockColor::opaque(40, 95, 30));
 
-        entries.insert("minecraft:glass", BlockColor::translucent(215, 230, 240, 80));
-        entries.insert("minecraft:glass_pane", BlockColor::translucent(215, 230, 240, 80));
-        entries.insert("minecraft:tinted_glass", BlockColor::translucent(40, 35, 45, 200));
+        entries.insert(
+            "minecraft:glass",
+            BlockColor::translucent(215, 230, 240, 80),
+        );
+        entries.insert(
+            "minecraft:glass_pane",
+            BlockColor::translucent(215, 230, 240, 80),
+        );
+        entries.insert(
+            "minecraft:tinted_glass",
+            BlockColor::translucent(40, 35, 45, 200),
+        );
         entries.insert("minecraft:ice", BlockColor::translucent(145, 180, 245, 190));
         entries.insert("minecraft:packed_ice", BlockColor::opaque(140, 175, 240));
         entries.insert("minecraft:blue_ice", BlockColor::opaque(115, 160, 245));
@@ -216,18 +324,33 @@ impl ColorMap {
         entries.insert("minecraft:nether_bricks", BlockColor::opaque(44, 21, 26));
 
         entries.insert("minecraft:end_stone", BlockColor::opaque(220, 223, 158));
-        entries.insert("minecraft:end_stone_bricks", BlockColor::opaque(218, 221, 155));
+        entries.insert(
+            "minecraft:end_stone_bricks",
+            BlockColor::opaque(218, 221, 155),
+        );
         entries.insert("minecraft:purpur_block", BlockColor::opaque(169, 125, 169));
 
         entries.insert("minecraft:stone_bricks", BlockColor::opaque(122, 122, 122));
-        entries.insert("minecraft:mossy_stone_bricks", BlockColor::opaque(110, 124, 105));
-        entries.insert("minecraft:cracked_stone_bricks", BlockColor::opaque(115, 115, 115));
-        entries.insert("minecraft:chiseled_stone_bricks", BlockColor::opaque(118, 118, 118));
+        entries.insert(
+            "minecraft:mossy_stone_bricks",
+            BlockColor::opaque(110, 124, 105),
+        );
+        entries.insert(
+            "minecraft:cracked_stone_bricks",
+            BlockColor::opaque(115, 115, 115),
+        );
+        entries.insert(
+            "minecraft:chiseled_stone_bricks",
+            BlockColor::opaque(118, 118, 118),
+        );
         entries.insert("minecraft:bricks", BlockColor::opaque(150, 70, 56));
         entries.insert("minecraft:brick_block", BlockColor::opaque(150, 70, 56));
         entries.insert("minecraft:mud_bricks", BlockColor::opaque(137, 104, 76));
         entries.insert("minecraft:prismarine", BlockColor::opaque(100, 158, 147));
-        entries.insert("minecraft:prismarine_bricks", BlockColor::opaque(98, 170, 158));
+        entries.insert(
+            "minecraft:prismarine_bricks",
+            BlockColor::opaque(98, 170, 158),
+        );
         entries.insert("minecraft:dark_prismarine", BlockColor::opaque(52, 90, 76));
         entries.insert("minecraft:sea_lantern", BlockColor::opaque(172, 198, 192));
         entries.insert("minecraft:torch", BlockColor::translucent(255, 215, 0, 180));

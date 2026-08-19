@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -76,9 +76,9 @@ pub fn decompress_block(raw: &[u8], compression_type: u8) -> Result<Vec<u8>> {
             } else {
                 let mut def_decoder = flate2::read::DeflateDecoder::new(raw);
                 let mut def_out = Vec::new();
-                def_decoder
-                    .read_to_end(&mut def_out)
-                    .map_err(|e| AmberError::DecompressionFailed(format!("zlib/deflate block: {e}")))?;
+                def_decoder.read_to_end(&mut def_out).map_err(|e| {
+                    AmberError::DecompressionFailed(format!("zlib/deflate block: {e}"))
+                })?;
                 Ok(def_out)
             }
         }
@@ -103,7 +103,10 @@ pub fn decompress_block(raw: &[u8], compression_type: u8) -> Result<Vec<u8>> {
     }
 }
 
-pub fn read_sstable(file_path: impl AsRef<Path>, map: &mut HashMap<Vec<u8>, Vec<u8>>) -> Result<()> {
+pub fn read_sstable(
+    file_path: impl AsRef<Path>,
+    map: &mut HashMap<Vec<u8>, Vec<u8>>,
+) -> Result<()> {
     let p = file_path.as_ref();
     let mut file = File::open(p)?;
     let mut data = Vec::new();

@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -58,10 +58,7 @@ impl TileCoord {
 
     #[inline(always)]
     pub fn quadrant_in_parent(&self) -> (usize, usize) {
-        (
-            self.x.rem_euclid(2) as usize,
-            self.y.rem_euclid(2) as usize,
-        )
+        (self.x.rem_euclid(2) as usize, self.y.rem_euclid(2) as usize)
     }
 
     #[inline(always)]

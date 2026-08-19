@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -185,9 +185,13 @@ fn test_subchunk_v9_two_layers_with_sub_y() {
     assert_eq!(subchunk.subchunk_y, Some(-3));
     assert_eq!(subchunk.layers.len(), 2);
 
-    let layer0_block = subchunk.get_block(0, 5, 5, 5).expect("layer 0 block missing");
+    let layer0_block = subchunk
+        .get_block(0, 5, 5, 5)
+        .expect("layer 0 block missing");
     assert_eq!(layer0_block.name, "minecraft:stone");
 
-    let layer1_block = subchunk.get_block(1, 5, 5, 5).expect("layer 1 block missing");
+    let layer1_block = subchunk
+        .get_block(1, 5, 5, 5)
+        .expect("layer 1 block missing");
     assert_eq!(layer1_block.name, "minecraft:water");
 }

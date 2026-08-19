@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -157,7 +157,11 @@ enum Commands {
         #[arg(long, help = "Disable 2.5D hillshading")]
         no_hillshading: bool,
 
-        #[arg(long, default_value_t = 16, help = "Scale multiplier (16 = 256x256 PNG)")]
+        #[arg(
+            long,
+            default_value_t = 16,
+            help = "Scale multiplier (16 = 256x256 PNG)"
+        )]
         scale: u32,
     },
 }
@@ -170,6 +174,7 @@ fn parse_dimension(dim: &str) -> Dimension {
     }
 }
 
+#[allow(clippy::manual_is_multiple_of)]
 fn format_number(n: usize) -> String {
     let s = n.to_string();
     let mut result = String::new();

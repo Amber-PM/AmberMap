@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -82,7 +82,10 @@ pub fn render_world_map(options: RenderOptions) -> Result<RenderStats> {
     let mut tile_groups: HashMap<(i32, i32), Vec<ChunkPos>> = HashMap::new();
     for chunk in &chunks {
         let coord = TileCoord::from_chunk_pos(*chunk, max_zoom);
-        tile_groups.entry((coord.x, coord.y)).or_default().push(*chunk);
+        tile_groups
+            .entry((coord.x, coord.y))
+            .or_default()
+            .push(*chunk);
     }
 
     let colormap = ColorMap::new();
@@ -117,12 +120,9 @@ pub fn render_world_map(options: RenderOptions) -> Result<RenderStats> {
                 )?;
 
                 total_tiles_count.fetch_add(1, Ordering::Relaxed);
-                let mut map = base_tiles_map.lock().map_err(|_| {
-                    AmberError::Io(std::io::Error::new(
-                        std::io::ErrorKind::Other,
-                        "lock poisoned",
-                    ))
-                })?;
+                let mut map = base_tiles_map
+                    .lock()
+                    .map_err(|_| AmberError::Io(std::io::Error::other("lock poisoned")))?;
                 map.insert(tile_coord, tile_buf);
             }
 
@@ -186,7 +186,8 @@ pub fn render_world_map(options: RenderOptions) -> Result<RenderStats> {
                 }
             }
 
-            let next_layer_mutex: Mutex<HashMap<TileCoord, TileBuffer>> = Mutex::new(HashMap::new());
+            let next_layer_mutex: Mutex<HashMap<TileCoord, TileBuffer>> =
+                Mutex::new(HashMap::new());
 
             parent_coords
                 .into_par_iter()
@@ -211,12 +212,9 @@ pub fn render_world_map(options: RenderOptions) -> Result<RenderStats> {
                         )?;
 
                         total_tiles_count.fetch_add(1, Ordering::Relaxed);
-                        let mut map = next_layer_mutex.lock().map_err(|_| {
-                            AmberError::Io(std::io::Error::new(
-                                std::io::ErrorKind::Other,
-                                "lock poisoned",
-                            ))
-                        })?;
+                        let mut map = next_layer_mutex
+                            .lock()
+                            .map_err(|_| AmberError::Io(std::io::Error::other("lock poisoned")))?;
                         map.insert(parent_coord, parent_tile);
                     }
 

@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -105,9 +105,7 @@ pub fn start_server(config: ServerConfig) -> Result<()> {
 
             let not_found = Response::from_string("Tile Not Found")
                 .with_status_code(StatusCode(404))
-                .with_header(
-                    Header::from_bytes(&b"Content-Type"[..], &b"text/plain"[..]).unwrap(),
-                );
+                .with_header(Header::from_bytes(&b"Content-Type"[..], &b"text/plain"[..]).unwrap());
             let _ = request.respond(not_found);
             continue;
         }

@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -56,7 +56,9 @@ pub fn create_test_block_nbt(name: &str, version: i32) -> Vec<u8> {
 fn test_nbt_reader_blockstate() {
     let raw = create_test_block_nbt("minecraft:stone", 17959425);
     let mut reader = NbtReader::new(&raw);
-    let (root_name, tag) = reader.read_root_compound().expect("failed to read nbt compound");
+    let (root_name, tag) = reader
+        .read_root_compound()
+        .expect("failed to read nbt compound");
 
     assert_eq!(root_name, "");
     assert_eq!(tag.get_string("name"), Some("minecraft:stone"));

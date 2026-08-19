@@ -1,11 +1,11 @@
 /*
- *     _             _                __  __             
- *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __  
- *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \ 
+ *     _             _                __  __
+ *    / \   _ __ ___ | |__   ___ _ __ |  \/  | __ _ _ __
+ *   / _ \ | '_ ` _ \| '_ \ / _ \ '__|| |\/| |/ _` | '_ \
  *  / ___ \| | | | | | |_) |  __/ |   | |  | | (_| | |_) |
- * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/ 
- *                                                 |_|    
- * 
+ * /_/   \_\_| |_| |_|_.__/ \___|_|   |_|  |_|\__,_| .__/
+ *                                                 |_|
+ *
  * AmberMap - High-Performance Bedrock World Map Renderer
  * https://github.com/Amber-PM/AmberMap
  *
@@ -94,9 +94,8 @@ impl SubChunkParser {
 
         let mut blocks = Box::new([0u16; 4096]);
 
-        if bits_per_block != 0 {
-            let blocks_per_word = 32 / bits_per_block;
-            let words_count = (4096 + blocks_per_word - 1) / blocks_per_word;
+        if let Some(blocks_per_word) = 32usize.checked_div(bits_per_block) {
+            let words_count = 4096_usize.div_ceil(blocks_per_word);
             let bytes_needed = words_count * 4;
 
             if data.len().saturating_sub(*offset) < bytes_needed {
