@@ -1,0 +1,25 @@
+[package]
+name = "ambermap"
+version = "0.1.0"
+edition = "2021"
+authors = ["Amber-PM <https://github.com/Amber-PM>"]
+description = "High-Performance Bedrock World Map Renderer"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+byteorder = "1.5"
+zstd = "0.13"
+snap = "1.1"
+rayon = "1.10"
+thiserror = "2.0"
+clap = { version = "4.5", features = ["derive"] }
+rusty-leveldb = "4.0.1"
+flate2 = "1.1.9"
+
+[dev-dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
