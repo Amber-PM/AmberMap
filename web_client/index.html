@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmberMap - High-Performance Bedrock World Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="/css/map.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="brand">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2" stroke="#f59e0b" fill="#f59e0b22"/>
+                    <polyline points="2 17 12 22 22 17" stroke="#f59e0b"/>
+                    <polyline points="2 12 12 17 22 12" stroke="#f59e0b"/>
+                </svg>
+            </div>
+            <span class="brand-title">AmberMap</span>
+            <span class="brand-badge">Bedrock</span>
+        </div>
+
+        <nav class="dimension-selector" id="dim-selector">
+            <button class="dim-btn active" data-dim="overworld">Overworld</button>
+            <button class="dim-btn" data-dim="nether">Nether</button>
+            <button class="dim-btn" data-dim="the_end">The End</button>
+        </nav>
+
+        <div class="actions">
+            <button id="btn-recenter" class="action-btn" title="Recenter to Origin (0, 0)">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"/>
+                    <line x1="12" y1="3" x2="12" y2="7"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                    <line x1="3" y1="12" x2="7" y2="12"/>
+                    <line x1="17" y1="12" x2="21" y2="12"/>
+                </svg>
+                <span>Origin</span>
+            </button>
+        </div>
+    </header>
+
+    <main id="map" class="map-viewport"></main>
+
+    <footer class="hud-overlay">
+        <div class="hud-item coordinates">
+            <span class="hud-label">BLOCK</span>
+            <span class="hud-value" id="hud-block-coords">X: 0 &nbsp;|&nbsp; Z: 0</span>
+        </div>
+        <div class="hud-item chunk">
+            <span class="hud-label">CHUNK</span>
+            <span class="hud-value" id="hud-chunk-coords">0, 0</span>
+        </div>
+        <div class="hud-item zoom">
+            <span class="hud-label">ZOOM</span>
+            <span class="hud-value" id="hud-zoom-level">Z: 0</span>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
