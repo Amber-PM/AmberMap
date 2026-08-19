@@ -48,6 +48,14 @@ pub struct SubChunk {
 }
 
 impl SubChunk {
+    pub fn new(version: u8, layers: Vec<SubChunkStorage>, subchunk_y: Option<i8>) -> Self {
+        Self {
+            version,
+            layers,
+            subchunk_y,
+        }
+    }
+
     #[inline(always)]
     pub fn get_block(&self, layer: usize, x: usize, y: usize, z: usize) -> Option<&BlockState> {
         self.layers.get(layer)?.get_block(x, y, z)
